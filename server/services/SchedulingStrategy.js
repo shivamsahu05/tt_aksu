@@ -1523,14 +1523,13 @@ export class GreedyHeuristicStrategy extends SchedulingStrategy {
                 for (const sec of secsInGroup) {
                     let gaps = [];
                     for (const day of validDays) {
-                        const coreEntries = newEntries.filter(e => e.section_id === sec.id && e.day_id === day.id && !e.isLibrary && !e.isRemedial && !e.isSelfLearning);
                         const allEntries = newEntries.filter(e => e.section_id === sec.id && e.day_id === day.id);
 
-                        if (coreEntries.length < 2) continue;
+                        if (allEntries.length < 2) continue;
 
-                        const coreOrders = coreEntries.map(e => getOrder(e.time_slot_id));
-                        const minOrder = Math.min(...coreOrders);
-                        const maxOrder = Math.max(...coreOrders);
+                        const allOrders = allEntries.map(e => getOrder(e.time_slot_id));
+                        const minOrder = Math.min(...allOrders);
+                        const maxOrder = Math.max(...allOrders);
                         const occupiedOrders = allEntries.map(e => getOrder(e.time_slot_id));
 
                         for (const slot of sortedValidSlots) {

@@ -965,9 +965,11 @@ const TimetableManager = () => {
                                                                     return (
                                                                         <td key={slot.id} colSpan={colSpan} className="p-1" style={{ minWidth: `${120 * colSpan}px` }}>
                                                                             {cellEntries.map((e, idx) => {
-                                                                                const isLibrary = String(e.subject_code || '').toUpperCase() === 'LIB' || (e.subject_name && String(e.subject_name).toLowerCase().includes('library'));
-const isRem = isRemedialEntry(e);
-const isSL = isSelfLearningEntry(e);
+                                                                                const code = String(e.subject_code || '').trim().toUpperCase();
+                                                                                const name = String(e.subject_name || '').trim().toLowerCase();
+                                                                                const isLibrary = e.isLibrary === true || code === 'LIB' || name === 'library period' || name === 'library';
+                                                                                const isRem = isRemedialEntry(e);
+                                                                                const isSL = isSelfLearningEntry(e);
                                                                                 const colorStyle = isLibrary
                                                                                     ? { bg: '#e8f4f8', border: '#90cce0', text: '#1a6b8a' }
                                                                                     : isRem ? { bg: '#fff3e0', border: '#ffcc80', text: '#e65100' }
@@ -1066,9 +1068,11 @@ const isSL = isSelfLearningEntry(e);
 
                                                                 const cards = Array.from(subjectMap.entries()).map(([subjectId, entries], cardIdx) => {
                                                                     const e0 = entries[0];
-                                                                    const isLibrary = String(e0.subject_code || '').toUpperCase() === 'LIB' || (e0.subject_name && String(e0.subject_name).toLowerCase().includes('library'));
-const isRem = isRemedialEntry(e0);
-const isSL = isSelfLearningEntry(e0);
+                                                                    const code = String(e0.subject_code || '').trim().toUpperCase();
+                                                                    const name = String(e0.subject_name || '').trim().toLowerCase();
+                                                                    const isLibrary = e0.isLibrary === true || code === 'LIB' || name === 'library period' || name === 'library';
+                                                                    const isRem = isRemedialEntry(e0);
+                                                                    const isSL = isSelfLearningEntry(e0);
                                                                     const colorStyle = isLibrary
                                                                         ? { bg: '#e8f4f8', border: '#90cce0', text: '#1a6b8a' }
                                                                         : isRem ? { bg: '#fff3e0', border: '#ffcc80', text: '#e65100' }
