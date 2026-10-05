@@ -82,7 +82,8 @@ try {
         res.end(errorBody);
     });
 
-    fallback.listen(PORT, () => {
-        log(`Fallback error server listening on ${PORT}`);
+    const HOST = process.env.HOST || '0.0.0.0';
+    fallback.listen(PORT, HOST, () => {
+        log(`Fallback error server listening on ${HOST}:${PORT}`);
     });
 }

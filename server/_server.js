@@ -574,8 +574,9 @@ const PORT = process.env.PORT || 3000;
 console.log(`[SERVER] Starting... NODE_ENV=${process.env.NODE_ENV} LISTEN=${PORT}`);
 console.log(`[SERVER] DB_HOST=${process.env.DB_HOST} DB_NAME=${process.env.DB_NAME}`);
 
-const server = app.listen(PORT, () => {
-    console.log(`[SERVER] ✅ Listening on ${PORT}`);
+const HOST = process.env.HOST || '0.0.0.0';
+const server = app.listen(PORT, HOST, () => {
+    console.log(`[SERVER] ✅ Listening on ${HOST}:${PORT}`);
     setInterval(() => {
         NotificationService.checkAndSendUpcomingClassAlerts().catch(() => {});
     }, 60 * 1000);
