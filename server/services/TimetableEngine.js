@@ -1,6 +1,7 @@
 import db from '../config/db.js';
 import ConflictEngine from './ConflictEngine.js';
 import { GreedyHeuristicStrategy } from './SchedulingStrategy.js';
+import { getTimeSlotsForDepartment } from '../utils/timeSlotHelper.js';
 
 class TimetableEngine {
     constructor() {

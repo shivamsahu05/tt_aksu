@@ -142,7 +142,7 @@ export const sendDailyTimetableNotifications = async () => {
             SELECT 
                 t.id as teacher_id, t.full_name, t.mobile, t.email,
                 ts.start_time, ts.end_time,
-                sub.name as subject_name,
+                sub.full_name as subject_name,
                 c.program_name, c.semester,
                 s.section_name,
                 r.room_number
@@ -271,7 +271,7 @@ export const checkAndSendUpcomingClassAlerts = async () => {
             SELECT 
                 t.id as teacher_id, t.full_name, t.mobile, t.email,
                 ts.start_time, ts.end_time,
-                sub.name as subject_name,
+                sub.full_name as subject_name,
                 c.program_name, c.semester,
                 s.section_name,
                 r.room_number
