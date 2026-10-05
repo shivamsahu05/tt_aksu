@@ -1,0 +1,1 @@
+import"./rolldown-runtime-aKtaBQYM.js";import{d as e,i as t}from"./index-BGpPXDOt.js";e();var n=t(),r=({active:e,activeLabel:t=`Active`,inactiveLabel:r=`Inactive`})=>e?(0,n.jsx)(`span`,{className:`badge badge-success`,children:t}):(0,n.jsx)(`span`,{className:`badge badge-secondary`,children:r});export{r as t};

@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block admin and authenticated-only paths from indexing
+Disallow: /dashboard
+Disallow: /admin/
+Disallow: /department/
+Disallow: /faculty/
+Disallow: /api/
+
+# Allow login page (public entry point)
+Allow: /login
+
+# Sitemap location
+Sitemap: https://timetable-aksu.hackvitrasec.com/sitemap.xml

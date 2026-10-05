@@ -1,0 +1,3 @@
+# Hostinger Node.js Git Deployment - DO NOT add PassengerStartupFile here
+# Hostinger manages the startup file via the hPanel "Entry file" setting
+# Adding PassengerStartupFile here CONFLICTS with the panel settings

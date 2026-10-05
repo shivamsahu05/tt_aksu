@@ -1,0 +1,5 @@
+Room Number,Building,Capacity,Type,Department Code
+101,Main Block,60,theory,CSE
+Lab-1,Main Block,30,lab,CSE
+201,Main Block,60,both,Shared
+301,Main Block,60,theory,
