@@ -1425,6 +1425,12 @@ export class GreedyHeuristicStrategy extends SchedulingStrategy {
 
                     let placed = false;
                     for (const candidate of candidates) {
+                        // CRITICAL: Never place library into a slot already occupied by this section
+                        const slotOccupiedBySection = secsInGroup.some(sec =>
+                            newEntries.some(e => e.section_id === sec.id && e.day_id === day.id && e.time_slot_id === candidate.id)
+                        );
+                        if (slotOccupiedBySection) continue;
+
                         const roomId = findRoom(day.id, candidate.id, groupStrength, preferredRoom, requiredBuildingId);
                         if (!roomId) continue; 
                         
@@ -1437,12 +1443,21 @@ export class GreedyHeuristicStrategy extends SchedulingStrategy {
                         break;
                     }
                     
+                    // Fallback: place without a dedicated room if needed, but NEVER into an occupied slot
                     if (!placed && candidates.length > 0) {
-                        for (const sec of secsInGroup) {
-                            const entry = createEntry(context.librarySubjectId, day.id, candidates[0].id, true, false, false, isSharedGap, sec);
-                            entry.room_id = preferredRoom || null;
-                            newEntries.push(entry);
+                        const safeCandidate = candidates.find(candidate =>
+                            !secsInGroup.some(sec =>
+                                newEntries.some(e => e.section_id === sec.id && e.day_id === day.id && e.time_slot_id === candidate.id)
+                            )
+                        );
+                        if (safeCandidate) {
+                            for (const sec of secsInGroup) {
+                                const entry = createEntry(context.librarySubjectId, day.id, safeCandidate.id, true, false, false, isSharedGap, sec);
+                                entry.room_id = preferredRoom || null;
+                                newEntries.push(entry);
+                            }
                         }
+                        // If no safe candidate found, skip - do not force library into an occupied slot
                     }
                 }
             }
