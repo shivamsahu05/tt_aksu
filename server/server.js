@@ -38,8 +38,8 @@ log(`__dirname : ${__dirname}`);
 const serverFile = join(__dirname, '_server.js');
 log(`_server.js: ${existsSync(serverFile) ? 'EXISTS ✅' : 'MISSING ❌'}`);
 
-const PORT = process.env.PORT || 3000;
-log(`Using PORT: ${PORT}`);
+const PORT = process.env.PORT || process.env.NODE_PORT || 8080;
+log(`Using PORT: ${PORT} (raw process.env.PORT=${process.env.PORT})`);
 
 // ── Load the full Express app ─────────────────────────────────────────────────
 log('Loading _server.js ...');

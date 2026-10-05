@@ -569,10 +569,12 @@ app.use((req, res, next) => {
 });
 
 // ─── PORT / SOCKET DETECTION ─────────────────────────────────────────────────
-const PORT = process.env.PORT || 3000;
+// Hostinger proxy routes to 8080 by default; fallback chain covers all cases
+const PORT = process.env.PORT || process.env.NODE_PORT || 8080;
 
 console.log(`[SERVER] Starting... NODE_ENV=${process.env.NODE_ENV} LISTEN=${PORT}`);
 console.log(`[SERVER] DB_HOST=${process.env.DB_HOST} DB_NAME=${process.env.DB_NAME}`);
+console.log(`[SERVER] Raw process.env.PORT=${process.env.PORT} (resolved to ${PORT})`);
 
 const HOST = process.env.HOST || '0.0.0.0';
 const server = app.listen(PORT, HOST, () => {
